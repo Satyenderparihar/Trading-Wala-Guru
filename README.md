@@ -59,6 +59,8 @@ The course is divided into chronological modules for easy learning. Click on any
 • [**🏛 Taxation & Compliance Guide (India)**](./10%20📘%20Taxation%20&%20Compliance%20Guide%20(India)%20–%20Beginner%20→%20Advanced)
 • [**📅 Trading & Settlement Holidays Guide**](./11%20📘%20Trading%20&%20Settlement%20Holidays%20Guide)
 • [**🛡 Insurance Guide (India)**](./12%20📘%20Insurance%20Guide%20(India)%20–%20Beginner%20→%20Practical%20Understanding)
+• [**💻 Pine Script Master Guide**](./13%20-%20📘%20Pine%20Script%20Master%20Guide%20(Beginner%20→%20Pro))
+• [**🛠️ Elite Trading Tools (Pine Script)**](./14%20-%20📘%20Elite%20Trading%20Tools%20(Pine%20Script))
 
 ---
 
