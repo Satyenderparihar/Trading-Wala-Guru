@@ -1,0 +1,98 @@
+// This Pine Script™ code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © Satyenderparihar (Antigravity AI Agent)
+// TRENDMETER v1.0 - Visual Speedometer for RSI Trend
+
+//@version=5
+indicator('TRENDMETER Visual Speedometer', 'TRENDMETER', overlay=false)
+
+// ==========================================
+// SETTINGS
+// ==========================================
+offset = input.int(2, "Right Offset", tooltip="How many bars to the left to set the right side of the speedometer")
+radius = input.int(10, "Speedometer Radius", tooltip="Radius in bars of the semi circle")
+y_axis = input.float(0.00, "Y-Axis Position")
+y_scale = input.float(100.0, "Y-Axis Scaling", tooltip="100 by default will size the semicircle to fit RSI range")
+
+// ==========================================
+// CALCULATIONS
+// ==========================================
+var float pi = 2 * math.asin(1)
+
+x_axis = array.new_int(radius * 2, 0)
+for i = 0 to 2 * radius - 1 by 1
+    array.set(x_axis, i, time[i + offset])
+
+one_bar = int(ta.change(time))
+right_side = array.get(x_axis, 0)
+left_side = array.get(x_axis, 2 * radius - 1)
+x_center = array.get(x_axis, radius - 1)
+
+// ==========================================
+// DRAWING FUNCTIONS
+// ==========================================
+f_draw_sector(_sector_num, _total_sectors, _line_limit, _radius, _y_axis, _y_scale, _line_color, _line_width) =>
+    _segments_per_sector = math.floor(_line_limit / _total_sectors)
+    _total_segments = _segments_per_sector * _total_sectors
+    _radians_per_segment = pi / _total_segments
+    _radians_per_sector = pi / _total_sectors
+    _start_of_sector = _radians_per_sector * (_sector_num - 1)
+    for _i = 0 to _segments_per_sector - 1 by 1
+        _segment_line = line.new(x1=array.get(x_axis, int(math.round(math.cos(_start_of_sector + _radians_per_segment * _i) * (_radius - 1) + radius - 1))), y1=_y_axis + math.sin(_start_of_sector + _radians_per_segment * _i) * _y_scale, x2=array.get(x_axis, int(math.round(math.cos(_start_of_sector + _radians_per_segment * (_i + 1)) * (_radius - 1) + radius - 1))), y2=_y_axis + math.sin(_start_of_sector + _radians_per_sector / _segments_per_sector * (_i + 1)) * _y_scale, xloc=xloc.bar_time, color=_line_color, width=_line_width)
+        line.delete(_segment_line[1])
+
+f_draw_base_line(_left, _right, _y_axis, _color, _width) =>
+    _base_line = line.new(x1=_left, y1=_y_axis, x2=_right, y2=_y_axis, xloc=xloc.bar_time, color=_color, width=_width)
+    line.delete(_base_line[1])
+
+f_draw_needle(_val, _x_center, _radius, _y_axis, _y_scale, _color, _width) =>
+    _needle = line.new(x1=array.get(x_axis, int(math.round(math.cos(pi / 100 * _val) * (_radius - 1) + radius - 1))), y1=_y_axis + math.sin(pi / 100 * _val) * _y_scale, x2=_x_center, y2=_y_axis, xloc=xloc.bar_time, color=_color, width=_width)
+    line.delete(_needle[1])
+
+f_draw_tick(_num, _divisions, _radius_perc, _x_center, _radius, _y_axis, _y_scale, _color, _width) =>
+    _pos = pi / _divisions * _num
+    _tick = line.new(x1=array.get(x_axis, int(math.round(math.cos(_pos) * (_radius - 1) + radius - 1))), y1=_y_axis + math.sin(_pos) * _y_scale, x2=array.get(x_axis, int(math.round(math.cos(_pos) * (_radius - 1) * (1 - _radius_perc / 100) + _radius - 1))), y2=_y_axis + math.sin(_pos) * _y_scale * (1 - _radius_perc / 100), xloc=xloc.bar_time, color=_color, width=_width)
+    line.delete(_tick[1])
+
+f_draw_sector_label(_num, _divisions, _radius, _y_axis, _y_scale, _color, _txtcolor, _text) =>
+    _pos = pi / _divisions * _num
+    _x_coord = array.get(x_axis, int(math.round(math.cos(_pos) * (_radius - 1)) + _radius - 1))
+    _y_coord = _y_axis + math.sin(_pos) * _y_scale
+    _sector_label = label.new(x=_x_coord, y=_y_coord, xloc=xloc.bar_time, color=_color, textcolor=_txtcolor, style=_pos <= pi / 6 ? label.style_label_right : _pos < pi / 6 * 2 ? label.style_label_lower_right : _pos <= pi / 6 * 4 ? label.style_label_down : _pos <= pi / 6 * 5 ? label.style_label_lower_left : label.style_label_left, text=_text)
+    label.delete(_sector_label[1])
+
+f_draw_title_label(_radius_perc, _x_center, _y_axis, _y_scale, _color, _txtcolor, _text) =>
+    _title_label = label.new(x=_x_center, y=_y_axis - _radius_perc / 100 * _y_scale, xloc=xloc.bar_time, color=_color, textcolor=_txtcolor, style=label.style_label_center, text=_text)
+    label.delete(_title_label[1])
+
+// ==========================================
+// RENDER SPEEDOMETER
+// ==========================================
+if barstate.islast
+    f_draw_base_line(left_side, right_side, y_axis, color.white, 1)
+
+    // Draw Sectors
+    f_draw_sector(1, 5, 20, radius, y_axis, y_scale, color.yellow, 5)
+    f_draw_sector(2, 5, 20, radius, y_axis, y_scale, color.red, 5)
+    f_draw_sector(3, 5, 20, radius, y_axis, y_scale, color.gray, 5)
+    f_draw_sector(4, 5, 20, radius, y_axis, y_scale, color.lime, 5)
+    f_draw_sector(5, 5, 20, radius, y_axis, y_scale, color.yellow, 5)
+
+    // Draw Ticks
+    for i = 1 to 4
+        f_draw_tick(i, 5, 8, x_center, radius, y_axis, y_scale, color.white, 3)
+    for i = 1 to 9 by 2
+        f_draw_tick(i, 10, 6, x_center, radius, y_axis, y_scale, color.white, 1)
+
+    // Draw Labels
+    f_draw_sector_label(1, 10, radius, y_axis, y_scale, color.yellow, color.black, 'Retrace')
+    f_draw_sector_label(3, 10, radius, y_axis, y_scale, color.red, color.white, 'Sell')
+    f_draw_sector_label(5, 10, radius, y_axis, y_scale, color.gray, color.white, 'Neutral')
+    f_draw_sector_label(7, 10, radius, y_axis, y_scale, color.lime, color.white, 'Buy')
+    f_draw_sector_label(9, 10, radius, y_axis, y_scale, color.yellow, color.black, 'Retrace')
+
+    // Calculation Metric (RSI)
+    metric = ta.rsi(close, 14)
+
+    // Draw Needle
+    f_draw_needle(metric, x_center, radius, y_axis, y_scale, color.blue, 2)
+    f_draw_title_label(25, x_center, y_axis, y_scale, color.blue, color.white, 'TRENDMETER (RSI)')
