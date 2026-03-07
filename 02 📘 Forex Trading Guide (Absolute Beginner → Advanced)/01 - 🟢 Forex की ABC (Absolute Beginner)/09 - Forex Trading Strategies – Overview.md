@@ -1,7 +1,3 @@
-Satyanarayan, यहाँ **Forex Trading Strategies – Overview** को एक साफ, structured तरीके से समझते हैं ताकि आपको पता चले कि **traders market में profit के लिए कौन-कौन सी strategies use करते हैं**। 💹
-
----
-
 # 1. Forex Trading Strategy क्या होती है
 
 Forex Trading Strategy = Market में **entry, exit और risk control का plan**।
