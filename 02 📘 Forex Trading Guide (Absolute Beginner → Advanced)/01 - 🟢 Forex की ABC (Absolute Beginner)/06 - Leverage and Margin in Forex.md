@@ -1,6 +1,3 @@
-  
----
-
 # 1. Leverage क्या होता है
 
 Leverage = Broker का दिया हुआ **borrowing power**।
