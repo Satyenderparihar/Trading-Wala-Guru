@@ -1,7 +1,5 @@
 # 📘 PIPs Kya Hote Hain aur Kaise Kaam Karte Hain?
 
-> **TradeSensei Vikram** — Module 1, Topic 4
-
 ---
 
 # 1. Pip क्या होता है
