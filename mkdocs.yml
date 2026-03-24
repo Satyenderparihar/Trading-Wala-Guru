@@ -7,8 +7,11 @@ docs_dir: Trading_Course
 extra:
   social:
     - icon: fontawesome/brands/instagram
-      link: https://instagram.com/Satyenderparihar
+      link: "https://www.instagram.com/satya_motivation?utm_source=qr&igsh=amxtc3FiNXhzcmVm"
       name: Instagram par follow karein
+    - icon: fontawesome/brands/facebook
+      link: "https://www.facebook.com/share/18DVYhUP53/"
+      name: Facebook
     - icon: fontawesome/brands/telegram
       link: https://t.me/TradingWalaGuru
       name: Telegram Community
