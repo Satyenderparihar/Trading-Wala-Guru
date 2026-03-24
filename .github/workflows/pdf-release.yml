@@ -1,0 +1,46 @@
+name: Auto-Generate Course PDF
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Install System Dependencies for PDF
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-cffi python3-brotli libpango-1.0-0 libpangoft2-1.0-0
+
+      - name: Install Python Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build MkDocs and PDF
+        env:
+          ENABLE_PDF_EXPORT: "1"
+        run: mkdocs build
+
+      - name: Create or Update GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: success()
+        with:
+          tag_name: "latest-edition"
+          name: "Trading Wala Guru - Complete Free Course"
+          files: site/pdfs/document.pdf
+          body: "Download the complete and up-to-date PDF eBook of the Trading Wala Guru course."
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

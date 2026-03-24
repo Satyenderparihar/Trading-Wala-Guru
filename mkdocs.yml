@@ -25,3 +25,12 @@ markdown_extensions:
   - pymdownx.superfences
   - toc:
       permalink: true
+
+plugins:
+  - search
+  - with-pdf:
+      cover: true
+      cover_title: "Trading Wala Guru Course"
+      toc_title: "Table of Contents"
+      output_path: "pdfs/document.pdf"
+      enabled_if_env: ENABLE_PDF_EXPORT
