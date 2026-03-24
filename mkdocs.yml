@@ -2,6 +2,7 @@ site_name: Trading Wala Guru Course
 site_url: https://Satyenderparihar.github.io/Trading-Wala-Guru/
 repo_url: https://github.com/Satyenderparihar/Trading-Wala-Guru
 repo_name: Satyenderparihar/Trading-Wala-Guru
+docs_dir: course
 theme:
   name: material
   palette:
