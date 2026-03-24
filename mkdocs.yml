@@ -3,6 +3,18 @@ site_url: https://Satyenderparihar.github.io/Trading-Wala-Guru/
 repo_url: https://github.com/Satyenderparihar/Trading-Wala-Guru
 repo_name: Satyenderparihar/Trading-Wala-Guru
 docs_dir: Trading_Course
+
+extra:
+  social:
+    - icon: fontawesome/brands/instagram
+      link: https://instagram.com/Satyenderparihar
+      name: Instagram par follow karein
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/TradingWalaGuru
+      name: Telegram Community
+    - icon: fontawesome/brands/youtube
+      link: https://youtube.com/@SatyenderParihar
+      name: YouTube par subscribe karein
 theme:
   name: material
   palette:
