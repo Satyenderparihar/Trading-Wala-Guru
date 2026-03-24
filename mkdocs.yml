@@ -1,0 +1,27 @@
+site_name: Trading Wala Guru Course
+site_url: https://Satyenderparihar.github.io/Trading-Wala-Guru/
+repo_url: https://github.com/Satyenderparihar/Trading-Wala-Guru
+repo_name: Satyenderparihar/Trading-Wala-Guru
+theme:
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - toc:
+      permalink: true
