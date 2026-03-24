@@ -33,6 +33,9 @@ jobs:
           ENABLE_PDF_EXPORT: "1"
         run: mkdocs build
 
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force
+
       - name: Create or Update GitHub Release
         uses: softprops/action-gh-release@v2
         if: success()
