@@ -131,7 +131,7 @@ The author is **not a SEBI Registered Investment Advisor**. The concepts, exampl
 ## 👥 Join the Community & Updates
 Want to get daily market updates, setup analysis, and discuss trends?
 Join our community:
-- 📱 [**Join our Telegram Channel**](https://t.me/SatyamotivationA)
+- 📱 [**Join our Telegram Channel**](https://t.me/Satyamotivation)
 
 ---
 
