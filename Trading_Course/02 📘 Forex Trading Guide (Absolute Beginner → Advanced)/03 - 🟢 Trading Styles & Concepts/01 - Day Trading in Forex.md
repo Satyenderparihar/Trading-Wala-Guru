@@ -1,2 +1,0 @@
-# Day Trading in Forex
-

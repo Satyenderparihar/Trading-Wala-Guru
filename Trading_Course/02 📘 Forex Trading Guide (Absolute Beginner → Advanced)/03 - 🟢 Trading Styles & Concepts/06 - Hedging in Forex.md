@@ -1,2 +1,0 @@
-# Hedging in Forex
-

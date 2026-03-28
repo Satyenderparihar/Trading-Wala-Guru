@@ -1,2 +1,0 @@
-# Carry Trading
-
