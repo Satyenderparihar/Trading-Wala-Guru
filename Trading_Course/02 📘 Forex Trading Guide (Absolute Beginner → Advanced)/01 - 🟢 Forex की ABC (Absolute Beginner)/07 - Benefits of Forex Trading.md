@@ -1,2 +1,0 @@
-# Benefits of Forex Trading
-
