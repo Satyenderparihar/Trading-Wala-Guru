@@ -12,6 +12,9 @@ extra:
     - icon: fontawesome/brands/facebook
       link: "https://www.facebook.com/share/18DVYhUP53/"
       name: Facebook
+    - icon: fontawesome/brands/whatsapp
+      link: "https://wa.me/917976305274"
+      name: Chat on WhatsApp
     - icon: fontawesome/brands/telegram
       link: https://t.me/TradingWalaGuru
       name: Telegram Community
