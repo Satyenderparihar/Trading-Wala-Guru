@@ -1,2 +1,0 @@
-# IMPS → Instant Small Transfers
-
