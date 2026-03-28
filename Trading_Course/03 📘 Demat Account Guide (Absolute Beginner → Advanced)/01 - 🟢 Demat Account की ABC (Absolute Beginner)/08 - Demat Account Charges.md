@@ -1,2 +1,0 @@
-# Demat Account Charges
-
