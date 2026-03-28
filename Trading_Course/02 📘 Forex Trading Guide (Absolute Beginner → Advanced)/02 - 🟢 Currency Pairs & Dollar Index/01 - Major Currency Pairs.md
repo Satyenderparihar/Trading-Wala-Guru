@@ -1,2 +1,0 @@
-# Major Currency Pairs
-

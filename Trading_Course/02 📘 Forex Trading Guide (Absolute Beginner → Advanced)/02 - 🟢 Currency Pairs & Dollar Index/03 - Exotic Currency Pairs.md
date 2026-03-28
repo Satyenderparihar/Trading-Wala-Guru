@@ -1,2 +1,0 @@
-# Exotic Currency Pairs
-

@@ -1,2 +1,0 @@
-# USDINR Trading
-
