@@ -1,2 +1,0 @@
-# Trendlines and Channels
-

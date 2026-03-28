@@ -1,2 +1,0 @@
-# Candlestick Patterns in Forex
-
