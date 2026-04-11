@@ -75,6 +75,50 @@ fill(bodyMiddle, downTrend, color.new(color.red, 90), fillgaps=false)
 
 ---
 
+## 4. Advanced v6 Multi-Symbol RSI Scanner
+This "Pro" example uses the new v6 **Dynamic Data Request** feature. It checks the RSI values for 3 different symbols (e.g., AAPL, NVDA, TSLA) and displays them in a table on your chart.
+
+```pinescript
+//@version=6
+indicator("v6 Multi-Symbol RSI Scanner", overlay=true)
+
+// Inputs
+s1 = input.symbol("NASDAQ:AAPL", "Symbol 1")
+s2 = input.symbol("NASDAQ:NVDA", "Symbol 2")
+s3 = input.symbol("NASDAQ:TSLA", "Symbol 3")
+len = input.int(14, "RSI Length")
+
+// Function to get RSI for a dynamic symbol
+getRSI(sym) =>
+    request.security(sym, timeframe.period, ta.rsi(close, len))
+
+// Execute dynamic requests
+val1 = getRSI(s1)
+val2 = getRSI(s2)
+val3 = getRSI(s3)
+
+// Create a professional UI Table
+var table scTable = table.new(position.top_right, 2, 4, border_width=1)
+if barstate.islast
+    table.cell(scTable, 0, 0, "Symbol", bgcolor=color.gray, text_color=color.white)
+    table.cell(scTable, 1, 0, "RSI Value", bgcolor=color.gray, text_color=color.white)
+    
+    table.cell(scTable, 0, 1, s1)
+    table.cell(scTable, 1, 1, str.tostring(val1, "#.##"), bgcolor = val1 > 70 ? color.red : val1 < 30 ? color.green : color.gray)
+    
+    table.cell(scTable, 0, 2, s2)
+    table.cell(scTable, 1, 2, str.tostring(val2, "#.##"), bgcolor = val2 > 70 ? color.red : val2 < 30 ? color.green : color.gray)
+    
+    table.cell(scTable, 0, 3, s3)
+    table.cell(scTable, 1, 3, str.tostring(val3, "#.##"), bgcolor = val3 > 70 ? color.red : val3 < 30 ? color.green : color.gray)
+
+// Logging for debug
+if ta.crossover(val1, 70)
+    log.warning("Symbol 1: " + s1 + " is Overbought!")
+```
+
+---
+
 > [!TIP]
 > **Aap Apna Code Kaise Add Karein?**
 > Aap is Library mein apne hazaaron custom snippets add kar sakte hain. Bas naya script likhein, use `indicator()` name dein aur ek naye section mein paste kar dein!
