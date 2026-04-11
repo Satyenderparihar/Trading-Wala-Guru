@@ -1,0 +1,15 @@
+//@version=6
+indicator("SuperTrend ATR", overlay=true)
+
+atrPeriod = input.int(10, "ATR Period")
+src = input.source(hl2, "Source")
+multiplier = input.float(3.0, "ATR Multiplier")
+
+[supertrend, direction] = ta.supertrend(multiplier, atrPeriod)
+
+bodyMiddle = plot(src, display=display.none)
+upTrend = plot(direction < 0 ? supertrend : na, "Up Trend", color=color.green, style=plot.style_linebr)
+downTrend = plot(direction > 0 ? supertrend : na, "Down Trend", color=color.red, style=plot.style_linebr)
+
+fill(bodyMiddle, upTrend, color.new(color.green, 90), fillgaps=false)
+fill(bodyMiddle, downTrend, color.new(color.red, 90), fillgaps=false)
