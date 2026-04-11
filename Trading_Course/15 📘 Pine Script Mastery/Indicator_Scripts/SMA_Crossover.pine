@@ -1,0 +1,16 @@
+//@version=6
+indicator("SMA Crossover", overlay=true)
+
+fastLen = input.int(9, "Fast SMA Length")
+slowLen = input.int(21, "Slow SMA Length")
+
+fastSMA = ta.sma(close, fastLen)
+slowSMA = ta.sma(close, slowLen)
+
+plot(fastSMA, color=color.blue, title="Fast SMA")
+plot(slowSMA, color=color.orange, title="Slow SMA")
+
+// Vertical Background Highlights for Crosses
+bgCol = ta.crossover(fastSMA, slowSMA) ? color.new(color.green, 80) : 
+        ta.crossunder(fastSMA, slowSMA) ? color.new(color.red, 80) : na
+bgcolor(bgCol)
